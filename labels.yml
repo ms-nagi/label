@@ -1,0 +1,84 @@
+labels:
+  # --- 状態(ワークフロー) ---
+  - name: 新規
+    color: 1d76db
+    description: 起票直後・まだトリアージ(仕分け)前
+
+  - name: バグ
+    color: d73a4a
+    description: 動作しない・想定外の挙動がある
+
+  - name: 仕様確認待ち
+    color: d4a017
+    description: 仕様や方針が固まっておらず、自分の判断待ちでペンディング中
+
+  - name: 外部判断待ち
+    color: fb8c00
+    description: 自分・Claude以外(取引先/クライアント等)の判断や回答待ち
+
+  - name: ユーザ質問中
+    color: e8734d
+    description: 外部(取引先/クライアント等)に質問を投げ、返答待ちの状態
+
+  - name: 確認待ち
+    color: fbca04
+    description: 対応・実装は完了、動作確認やレビュー待ち
+
+  - name: 再修正
+    color: cb45b6
+    description: レビューで指摘があり、修正が必要
+
+  - name: 後回し
+    color: c5def5
+    description: 優先度が低く、いったん保留
+
+  - name: 完了
+    color: aaaaaa
+    description: 対応完了
+
+  # --- 優先度 ---
+  - name: "優先度：高"
+    color: b60205
+    description: 早急に対応が必要
+
+  - name: "優先度：中"
+    color: f4b400
+    description: 通常の優先度で対応
+
+  - name: "優先度：低"
+    color: 0e8a16
+    description: 急ぎではない・時間があるときに対応
+
+  # --- 種別 ---
+  - name: 機能追加
+    color: a2eeef
+    description: 新機能・新規実装の提案や作業
+
+  - name: リファクタリング
+    color: 5319e7
+    description: 挙動は変えず、コードの整理・改善を行う
+
+  - name: ドキュメント
+    color: 0075ca
+    description: README・設計メモ等ドキュメントの追加/更新
+
+  - name: 質問・相談
+    color: d876e3
+    description: 対応が必要な指摘ではなく、Claude自身への確認・相談メモ
+
+  - name: 重複
+    color: cfd3d7
+    description: 他のIssueと内容が重複している
+
+  # --- 領域 ---
+  - name: FRONTEND
+    color: 0e8a6d
+    description: フロントエンド側の作業・課題
+
+  - name: BACKEND
+    color: 006b75
+    description: バックエンド側の作業・課題
+
+  - name: INFRA
+    color: 264653
+    description: インフラ・環境構築・CI/CD・デプロイ周りの作業・課題
