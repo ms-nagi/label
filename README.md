@@ -10,7 +10,8 @@ Cloneコマンド：
 gh label clone ms-nagi/label --repo OWNER/新リポジトリ
 ```
 
-既存のLabelをすべて上書き（+削除）
+このリポジトリから labels.yml を落としてきてそれをリポジトリに突っ込む（既存のものはすべて消す、初回用）
 ```
-gh label-sync sync --file labels.yml --repo [OWNER]/[repo] --force --delete-unmanaged
+curl -sL https://raw.githubusercontent.com/ms-nagi/label/refs/heads/main/labels.yml -o /tmp/labels.yml
+gh label-sync sync --file /tmp/labels.yml --repo [OWNER]/[REPO] --force --delete-unmanaged
 ```
