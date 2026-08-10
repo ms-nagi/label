@@ -19,6 +19,7 @@ GitHub Issue 用ラベル定義を一元管理するためのリポジトリ。�
 gh label clone ms-nagi/label --repo OWNER/REPO
 
 # labels.yml を取得して同期（既存ラベルを全消しする初回用）
+# 事前に gh 拡張が必要: gh extension install scttfrdmn/gh-label-sync
 curl -sL https://raw.githubusercontent.com/ms-nagi/label/refs/heads/main/labels.yml -o /tmp/labels.yml
 gh label-sync sync --file /tmp/labels.yml --repo OWNER/REPO --force --delete-unmanaged
 ```
