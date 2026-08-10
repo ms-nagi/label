@@ -20,6 +20,10 @@ labels:
     color: e8734d
     description: 外部(取引先/クライアント等)に質問を投げ、返答待ちの状態
 
+  - name: 実装待ち
+    color: 84cc16
+    description: 要件定義が完了し、実装を待っている状態
+
   - name: 確認待ち
     color: fbca04
     description: 対応・実装は完了、動作確認やレビュー待ち
