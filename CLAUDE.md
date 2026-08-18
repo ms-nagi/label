@@ -16,16 +16,37 @@ GitHub Issue 用ラベル定義を一元管理するためのリポジトリ。�
 
 ```bash
 # 既存リポジトリからラベルをコピー
-gh label clone ms-nagi/label --repo OWNER/REPO
+gh label clone ms-nagi/label --repo OWNER/REPO --force
 
 # labels.yml を取得して同期（既存ラベルを全消しする初回用）
 # 事前に gh 拡張が必要: gh extension install scttfrdmn/gh-label-sync
 curl -sL https://raw.githubusercontent.com/ms-nagi/label/refs/heads/main/labels.yml -o /tmp/labels.yml
-gh label-sync sync --file /tmp/labels.yml --repo OWNER/REPO --force --delete-unmanaged
+GH_TOKEN="$(gh auth token)" gh label-sync sync --file /tmp/labels.yml --repo OWNER/REPO --force --delete-unmanaged --yes
 ```
+
+`labels.yml` を更新したときは、配布元であるこのリポジトリ自身にも同じ sync を
+`--repo ms-nagi/label` で実行する（理由は下記）。
+
+### label-sync に GH_TOKEN が必須な理由
+
+`gh label-sync` は `gh` 本体とは別バイナリで、gh が keyring（macOS キーチェーン）に保存した
+トークンを読めない。`gh auth status` が `Token: gho_... (keyring)` を表示する環境では
+拡張は未認証でリクエストするため、Public リポジトリ相手だと**読み取りと `--dry-run` は成功するのに
+書き込みだけが `HTTP 404: Not Found` で失敗する**。`GH_TOKEN="$(gh auth token)"` を前置して回避する。
+`gh label clone` は gh 本体のサブコマンドなので keyring を読めるため不要。
+
+### そのほかの落とし穴
 
 `--delete-unmanaged` は `labels.yml` に無いラベルを削除する。つまり「このファイルに書かれていないラベルは
 利用側リポジトリから消える」ことを前提に編集する。
+
+`--yes` を省くと `? Apply changes? (y/N)` の確認プロンプトが出る。TTY の無い環境（スクリプト・CI・
+エージェント経由の実行）ではこれに応答できず `Cancelled.` となり、1件も反映されないまま exit 0 で
+終わるため、対話実行以外では必ず付ける。
+
+`gh label clone` がコピーするのは `labels.yml` ではなく **このリポジトリの GitHub 上に登録済みの実ラベル**。
+そのため `labels.yml` を変更してコミットしただけでは clone 先に反映されない。また `--force` が無いと
+clone 先の同名ラベルはスキップされ、色や説明が更新されない。
 
 ## labels.yml の構造とルール
 
