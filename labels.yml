@@ -86,3 +86,32 @@ labels:
   - name: INFRA
     color: 264653
     description: インフラ・環境構築・CI/CD・デプロイ周りの作業・課題
+
+  # --- エージェント制御(フラグ) ---
+  - name: "agent:ready"
+    color: 2ea44f
+    description: エージェントが着手してよい状態(処理待ちキュー)
+
+  - name: "agent:wip"
+    color: 1f6feb
+    description: エージェントが作業中(他のエージェントは触らない)
+
+  - name: "agent:retry-1"
+    color: ffb703
+    description: エージェントの処理が1回失敗し、再試行待ち
+
+  - name: "agent:retry-2"
+    color: e85d04
+    description: エージェントの処理が2回失敗し、最終再試行待ち
+
+  - name: "agent:asked"
+    color: 00b8d4
+    description: エージェントの判断では解決せず、ユーザに確認中
+
+  - name: "agent:blocked"
+    color: 9e0142
+    description: エージェントでは処理できず、人の判断待ちで停止中
+
+  - name: "agent:done"
+    color: 6e7781
+    description: エージェントの処理が完了した
